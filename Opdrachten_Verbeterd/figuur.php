@@ -1,3 +1,6 @@
+<?php
+     $g1 = filter_input(INPUT_POST, "getal1", FILTER_VALIDATE_INT);
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,12 +10,11 @@
     <body>
         <h3>Figuur tonen</h3>
         <form method="POST">
-            <p>Typ een getal: <input type="text" step="1" min="0" name="getal1"></p>
+            <p>Typ een getal: <input type="number" step="1" min="0" name="getal1" value="<?= !empty($g1)? $g1 : ""; ?>" required></p>
         <p><input type="submit" name="figuur_tonen" value="figuur tonen"></p>
         </form>
         <center>
             <?php
-            $g1 = filter_input(INPUT_POST, "getal1", FILTER_VALIDATE_INT);
                 if($g1 !== null)
                 {
                     if($g1 !== false)
@@ -29,12 +31,12 @@
                     }
                     else
                     {
-                        echo "Baby hacker alert";
+                        echo "Onjuiste invoer";
                     }
                 }
                 else
                 {
-                    echo "";
+                    echo "Vul een getal in";
                 }
             ?>
         </center>

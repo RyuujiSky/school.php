@@ -1,3 +1,11 @@
+<?php
+     $getal = filter_input(INPUT_POST, "getal", FILTER_VALIDATE_INT);
+    function calculate($getal,$i)
+    {
+            $antwoord = $getal*$i;
+            return $antwoord;
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,25 +14,24 @@
     </head>
     <body>
         <h3>Tafels</h3>
-        <?php
-            function calculate($getal,$i)
-            {
-                    $antwoord = $getal*$i;
-                    return $antwoord;
-            }
-        ?>
         <form method="POST">
             <?php
                 for($i=1;$i<=20;$i++)
                 {
-                    echo "<input type=\"radio\" name=\"getal\" value=\"$i\"><label>$i</label>";
+                    if(is_int($getal) && $getal==$i)
+                    {
+                        echo "<input type=\"radio\" name=\"getal\" value=\"$i\" checked><label>$i</label>";
+                    }
+                    else
+                    {
+                        echo "<input type=\"radio\" name=\"getal\" value=\"$i\"><label>$i</label>";
+                    }
                 }
             ?>
             <input type="submit" name="verstuur" value="Versturen">
         </form>
         <table style="border:1px solid black">
             <?php
-                $getal = filter_input(INPUT_POST, "getal", FILTER_VALIDATE_INT);
                 if($getal !== null)
                 {
                     if($getal !== false)
@@ -38,7 +45,7 @@
                     }
                     else
                     {
-                        echo "Just dial 911 and report yourself";
+                        echo "Onjuiste invoer";
                     }
                 }
             ?>
